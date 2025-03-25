@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>যাকাত ক্যালকুলেটর</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="container">
+    <header>
         <h1 id="title" onclick="showForm()">যাকাত ক্যালকুলেটর</h1>
-        <div id="calculator" class="hidden">
-            <form id="zakatForm">
-                <label>নগদ টাকা (৳): <input type="number" id="cash" value="0"></label>
-                <label>ব্যাংক জমা (৳): <input type="number" id="bank" value="0"></label>
-                <label>সোনা (গ্রাম): <input type="number" id="gold" value="0"></label>
-                <label>রূপা (গ্রাম): <input type="number" id="silver" value="0"></label>
-                <label>বিনিয়োগ (৳): <input type="number" id="investment" value="0"></label>
-                <label>অন্য সম্পদ (৳): <input type="number" id="other_assets" value="0"></label>
-                <label>ঋণ (৳): <input type="number" id="debt" value="0"></label>
-                <button type="button" onclick="calculateZakat()">হিসাব করুন</button>
-            </form>
-            <h2 id="result"></h2>
-        </div>
+    </header>
+
+    <main id="zakatFormContainer" style="display: none;">
+        <form id="zakatForm">
+            <label>নগদ টাকা (৳): <input type="number" id="cash" value="0"></label>
+            <label>ব্যাংক জমা (৳): <input type="number" id="bank" value="0"></label>
+            <label>সোনা (গ্রাম): <input type="number" id="gold" value="0"></label>
+            <label>রূপা (গ্রাম): <input type="number" id="silver" value="0"></label>
+            <label>বিনিয়োগ (৳): <input type="number" id="investment" value="0"></label>
+            <label>অন্য সম্পদ (৳): <input type="number" id="other_assets" value="0"></label>
+            <label>ঋণ (৳): <input type="number" id="debt" value="0"></label>
+            <button type="button" onclick="calculateZakat()">হিসাব করুন</button>
+        </form>
+    </main>
+
+    <div id="resultContainer" style="display: none;">
+        <h2>আপনার যাকাতের হিসাব</h2>
+        <h3 id="totalAssets"></h3>
+        <h3 id="totalDebt"></h3>
+        <h3 id="zakatAmount"></h3>
+        <button onclick="resetCalculator()">পুনরায় হিসাব করুন</button>
     </div>
+
     <script src="script.js"></script>
 </body>
-
 </html>
