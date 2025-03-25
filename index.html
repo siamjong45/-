@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>যাকাত ক্যালকুলেটর</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>যাকাত ক্যালকুলেটর</h1>
+    </header>
+    <main>
+        <form id="zakatForm">
+            <label>নগদ টাকা (৳): <input type="number" id="cash" value="0"></label>
+            <label>ব্যাংক জমা (৳): <input type="number" id="bank" value="0"></label>
+            <label>সোনা (গ্রাম): <input type="number" id="gold" value="0"></label>
+            <label>রূপা (গ্রাম): <input type="number" id="silver" value="0"></label>
+            <label>বিনিয়োগ (৳): <input type="number" id="investment" value="0"></label>
+            <label>অন্য সম্পদ (৳): <input type="number" id="other_assets" value="0"></label>
+            <label>ঋণ (৳): <input type="number" id="debt" value="0"></label>
+            <button type="button" onclick="calculateZakat()">হিসাব করুন</button>
+        </form>
+        <h2 id="result"></h2>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
