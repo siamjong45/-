@@ -21,11 +21,8 @@ function calculateZakat() {
     // **মোট সম্পদ থেকে দেনা বাদ দেয়া**
     let netAssets = totalAssets - debt;
 
-    // **যাকাত ফরজ কিনা তা চেক করা**
-    let zakatAmount = 0;
-    if (netAssets >= nisab) {
-        zakatAmount = netAssets * 0.025; // ২.৫% যাকাত
-    }
+    // **যাকাত ফরজ কিনা তা চেক করা এবং যাকাত হিসাব**
+    let zakatAmount = netAssets * 0.025; // ২.৫% যাকাত
 
     // **ফলাফল দেখানো**
     document.getElementById("result").innerHTML = `
