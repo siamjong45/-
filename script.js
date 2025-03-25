@@ -1,3 +1,8 @@
+function showForm() {
+    document.getElementById('title').style.display = 'none';
+    document.getElementById('calculator').classList.remove('hidden');
+}
+
 function calculateZakat() {
     let cash = parseFloat(document.getElementById('cash').value) || 0;
     let bank = parseFloat(document.getElementById('bank').value) || 0;
@@ -7,14 +12,17 @@ function calculateZakat() {
     let other_assets = parseFloat(document.getElementById('other_assets').value) || 0;
     let debt = parseFloat(document.getElementById('debt').value) || 0;
 
-    let goldValue = gold * 9500; // স্বর্ণের বাজার মূল্য (প্রতি গ্রাম ৯৫০০৳)
-    let silverValue = silver * 130; // রূপার বাজার মূল্য (প্রতি গ্রাম ১৩০৳)
+    let gold_value = gold * 7000; // প্রতি গ্রাম স্বর্ণের মূল্য (উদাহরণস্বরূপ)
+    let silver_value = silver * 100; // প্রতি গ্রাম রূপার মূল্য
 
-    let total_assets = cash + bank + goldValue + silverValue + investment + other_assets;
+    let total_assets = cash + bank + gold_value + silver_value + investment + other_assets;
     let net_assets = total_assets - debt;
+    
+    let zakat = net_assets >= 85000 ? (net_assets * 2.5) / 100 : 0;
 
-    let nisab = 85000; // ২০২৫ সালের জন্য নিসাব মাত্রা (স্বর্ণের হিসাবে)
-    let zakat = net_assets >= nisab ? net_assets * 0.025 : 0;
-
-    document.getElementById('result').innerText = zakat > 0 ? `আপনার যাকাত দিতে হবে: ${zakat.toFixed(2)}৳` : "আপনার যাকাত দেওয়ার প্রয়োজন নেই।";
+    document.getElementById('result').innerHTML = `
+        <p>মোট সম্পদ: ${total_assets.toFixed(2)}৳</p>
+        <p>মোট দায়: ${debt.toFixed(2)}৳</p>
+        <p>প্রযোজ্য যাকাত: ${zakat.toFixed(2)}৳</p>
+    `;
 }
