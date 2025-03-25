@@ -1,28 +1,36 @@
-function showForm() {
-    document.getElementById('title').style.display = 'none';
-    document.getElementById('calculator').classList.remove('hidden');
-}
-
 function calculateZakat() {
-    let cash = parseFloat(document.getElementById('cash').value) || 0;
-    let bank = parseFloat(document.getElementById('bank').value) || 0;
-    let gold = parseFloat(document.getElementById('gold').value) || 0;
-    let silver = parseFloat(document.getElementById('silver').value) || 0;
-    let investment = parseFloat(document.getElementById('investment').value) || 0;
-    let other_assets = parseFloat(document.getElementById('other_assets').value) || 0;
-    let debt = parseFloat(document.getElementById('debt').value) || 0;
+    // ইউজারের ইনপুট নেয়া
+    let cash = parseFloat(document.getElementById("cash").value) || 0;
+    let bank = parseFloat(document.getElementById("bank").value) || 0;
+    let gold = parseFloat(document.getElementById("gold").value) || 0; // গ্রামে
+    let silver = parseFloat(document.getElementById("silver").value) || 0; // গ্রামে
+    let investment = parseFloat(document.getElementById("investment").value) || 0;
+    let other_assets = parseFloat(document.getElementById("other_assets").value) || 0;
+    let debt = parseFloat(document.getElementById("debt").value) || 0;
 
-    let gold_value = gold * 7000; // প্রতি গ্রাম স্বর্ণের মূল্য (উদাহরণস্বরূপ)
-    let silver_value = silver * 100; // প্রতি গ্রাম রূপার মূল্য
+    // সোনা ও রূপার বর্তমান বাজার মূল্য (টাকা/গ্রাম)
+    let goldRate = 9000;  // উদাহরণস্বরূপ, প্রতি গ্রামের সোনার মূল্য ৯০০০ টাকা
+    let silverRate = 150; // প্রতি গ্রামের রূপার মূল্য ১৫০ টাকা
 
-    let total_assets = cash + bank + gold_value + silver_value + investment + other_assets;
-    let net_assets = total_assets - debt;
-    
-    let zakat = net_assets >= 85000 ? (net_assets * 2.5) / 100 : 0;
+    // মোট সম্পদ গণনা
+    let totalAssets = (gold * goldRate) + (silver * silverRate) + cash + bank + investment + other_assets;
 
-    document.getElementById('result').innerHTML = `
-        <p>মোট সম্পদ: ${total_assets.toFixed(2)}৳</p>
-        <p>মোট দায়: ${debt.toFixed(2)}৳</p>
-        <p>প্রযোজ্য যাকাত: ${zakat.toFixed(2)}৳</p>
+    // নিসাব পরিমাণের হিসাব (রূপার নিসাব অনুযায়ী)
+    let nisab = 612.36 * silverRate; // নিসাব পরিমাণ = ৬১২.৩৬ গ্রাম রূপার মূল্য
+
+    // মোট সম্পদ থেকে দেনা বাদ দেয়া
+    let netAssets = totalAssets - debt;
+
+    // যাকাতের পরিমাণ নির্ধারণ
+    let zakatAmount = 0;
+    if (netAssets >= nisab) {
+        zakatAmount = netAssets * 0.025; // ২.৫% যাকাত
+    }
+
+    // ফলাফল প্রদর্শন
+    document.getElementById("result").innerHTML = `
+        <h3>মোট সম্পদ: ${totalAssets.toFixed(2)} টাকা</h3>
+        <h3>মোট দায় (ঋণ): ${debt.toFixed(2)} টাকা</h3>
+        <h3>প্রযোজ্য যাকাত: ${zakatAmount.toFixed(2)} টাকা</h3>
     `;
 }
